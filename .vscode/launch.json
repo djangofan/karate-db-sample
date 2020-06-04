@@ -7,7 +7,7 @@
             "request": "launch",
             "feature": "${command:karateRunner.getDebugFile}",
             "karateOptions": "",
-            "karateCli": "mvn test-compile -f \"${command:karateRunner.getDebugBuildFile}\" exec:java -Dexec.mainClass=com.intuit.karate.cli.Main -Dexec.args=\"-d\" -Dexec.classpathScope=\"test\" ${config:karateRunner.karateRunner.commandLineArgs}"
+            "karateCli": "mvn test-compile -f \"${command:karateRunner.getDebugBuildFile}\" exec:java -Dexec.mainClass=com.intuit.karate.cli.Main -D\"exec.args=-d\" -D\"exec.classpathScope=test\" ${config:karateRunner.karateRunner.commandLineArgs}"
         }
     ]
 }

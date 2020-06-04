@@ -17,7 +17,7 @@ import org.junit.jupiter.api.Test;
 public class KarateTest {
 
     @Test
-    public void runTestsInParallel() {
+    public void runTests() {
         Results results = Runner.parallel(getClass(), 1);
         generateReport(results.getReportDir());
         Assertions.assertTrue(results.getFailCount() == 0);

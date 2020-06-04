@@ -1,0 +1,13 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "karate",
+            "name": "Karate (debug): Maven 1",
+            "request": "launch",
+            "feature": "${command:karateRunner.getDebugFile}",
+            "karateOptions": "",
+            "karateCli": "mvn test-compile -f pom.xml exec:java -Dexec.mainClass=com.intuit.karate.cli.Main -Dexec.args='-d 4711' -Dexec.classpathScope=test"
+        }
+    ]
+}

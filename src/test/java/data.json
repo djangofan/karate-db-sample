@@ -1,0 +1,14 @@
+{
+    "dev": {
+       "name": "dev",
+       "url": "https://jsonplaceholder.typicode.com"
+    },
+    "int": {
+       "name": "int",
+       "url": "https://jsonplaceholder.typicode.com"
+    },
+    "prd": {
+       "name": "prd",
+       "url": "https://jsonplaceholder.typicode.com"
+    }
+}

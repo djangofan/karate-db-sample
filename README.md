@@ -6,6 +6,11 @@ DB Query Testing Example In Karate
 
 See Karate website
 
+## Execute
+
+    mvn clean test
+
+    
 
 ### MSSQL Server
 

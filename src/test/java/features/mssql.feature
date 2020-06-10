@@ -12,4 +12,4 @@ Feature: mssql query test
     * def queryResult = db.queryDB("SELECT TOP (3) * FROM [TEST].[dbo].[Order]")
     * karate.log(queryResult)
     * print "queryResult: " + queryResult
-    
+

@@ -4,6 +4,10 @@ import java.sql.*;
 import java.util.Properties;
 import java.util.logging.Logger;
 
+/**
+ * This shim allows loading of the driver within a context class loader rather than only the system class loader.
+ * I believe Karate-Runner VSCode plugin, forks to a context class loader during debug sessions.
+ */
 public class DriverShim implements Driver {
     
     private Driver driver;

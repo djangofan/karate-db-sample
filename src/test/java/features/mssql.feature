@@ -9,6 +9,8 @@ Feature: mssql query test
   @db
   Scenario: query mssql
     * print ("Check the DEBUG CONSOLE to see if there is a JDBC error.")
-    * karate.log(db.queryDB("SELECT TOP (1) * FROM [TEST].[dbo].[Order]"))
+    * def queryResult = db.queryDB("SELECT TOP (3) * FROM [TEST].[dbo].[Order]")
+    * karate.log(queryResult)
+    * print "queryResult: " + queryResult
 
 

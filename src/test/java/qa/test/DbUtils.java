@@ -1,43 +1,70 @@
 package qa.test;
 
+import java.sql.Connection;
+import java.sql.Driver;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.ResultSetMetaData;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-//import org.slf4j.Logger;
-//import org.slf4j.LoggerFactory;
-import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class DbUtils {
-    
-    //private static final Logger logger = LoggerFactory.getLogger(DbUtils.class); 
-    
-    private final JdbcTemplate jdbc = null;
 
-    public DbUtils(Map<String, Object> config) {
-        //String url = (String) config.get("url");
-        //String username = (String) config.get("username");
-        //String password = (String) config.get("password");
-        String driver = (String) config.get("driverClassName");
-        DriverManagerDataSource dataSource = new DriverManagerDataSource();
-        dataSource.setDriverClassName(driver);
-        //dataSource.setUrl(url);
-        //dataSource.setUsername(username);
-        //dataSource.setPassword(password);
-        //jdbc = new JdbcTemplate(dataSource);
-        //logger.info("init jdbc template: {}", url);
+    private final Map<String, Object> config;
+
+    public DbUtils(final Map<String, Object> configuration) {
+        this.config = configuration;
+    }
+
+    public List<Map<String, Object>> queryDB(final String query)
+            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+        final String url = (String) config.get("url");
+        final String username = (String) config.get("username");
+        final String password = (String) config.get("password");
+        final String driverClassName = (String) config.get("driverClassName");
+        final String formattedUrl = String.format(url, username, password);
+
+        Connection conn = null;
+        Statement stmt = null;
+
+        try {
+            final Driver d = (Driver) Class.forName(driverClassName).newInstance();
+            DriverManager.registerDriver(new DriverShim(d));
+            conn = DriverManager.getConnection(formattedUrl);
+            System.out.println(String.format("Connection made to MsSql jdbc: %s", formattedUrl));
+            stmt = conn.createStatement();
+            return resultSetToArrayList(stmt.executeQuery(query));
+        } catch (final SQLException e1) {
+            e1.printStackTrace();
+        } finally {
+            try {
+				//stmt.close;
+                conn.close();
+            } catch (final SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        return null;
     }
     
-    public Object readValue(String query) {
-        return jdbc.queryForObject(query, Object.class);
-    }    
-    
-    public Map<String, Object> readRow(String query) {
-        return jdbc.queryForMap(query);
-    }
-    
-    public List<Map<String, Object>> readRows(String query) {
-        return jdbc.queryForList(query);
-    }     
+    public List<Map<String, Object>> resultSetToArrayList(final ResultSet rs) throws SQLException {
+        final ResultSetMetaData md = rs.getMetaData();
+        final int columns = md.getColumnCount();
+        final List<Map<String, Object>> list = new ArrayList(50);
+        while (rs.next()) {
+            final Map<String, Object> row = new HashMap(columns);
+            for (int i=1; i<=columns; ++i) {           
+                row.put(md.getColumnName(i), rs.getObject(i));
+            }
+            list.add(row);
+        }
+        return list;
+      }
+ 
     
 }
 

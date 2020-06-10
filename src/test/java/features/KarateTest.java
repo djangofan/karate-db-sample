@@ -10,8 +10,8 @@ import java.util.List;
 import net.masterthought.cucumber.Configuration;
 import net.masterthought.cucumber.ReportBuilder;
 import org.apache.commons.io.FileUtils;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 @KarateOptions(tags = {"@db", "~@ignore"})
 public class KarateTest {
@@ -20,7 +20,7 @@ public class KarateTest {
     public void runTests() {
         Results results = Runner.parallel(getClass(), 1);
         generateReport(results.getReportDir());
-        Assertions.assertTrue(results.getFailCount() == 0);
+        Assert.assertTrue(results.getFailCount() == 0);
     }
 
     public static void generateReport(String karateOutputPath) {

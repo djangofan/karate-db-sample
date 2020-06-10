@@ -1,13 +1,24 @@
 {
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
         {
             "type": "karate",
-            "name": "Karate (debug): Maven 1",
+            "name": "Karate (debug): Maven",
             "request": "launch",
             "feature": "${command:karateRunner.getDebugFile}",
             "karateOptions": "",
-            "karateCli": "mvn test-compile -f pom.xml exec:java -Dexec.mainClass=com.intuit.karate.cli.Main -Dexec.args='-d 4711' -Dexec.classpathScope=test"
+            "karateCli": "mvn test-compile -f \"${command:karateRunner.getDebugBuildFile}\" exec:java -Dexec.mainClass=com.intuit.karate.cli.Main -Dexec.args=\"-d\" -Dexec.classpathScope=\"test\" ${config:karateRunner.karateRunner.commandLineArgs}" 
+        },
+        {
+            "type": "karate",
+            "name": "Karate (debug): Standalone",
+            "request": "launch",
+            "feature": "${command:karateRunner.getDebugFile}",
+            "karateOptions": "",
+            "karateCli": "${config:karateRunner.karateJar.commandLineArgs} -d"
         }
     ]
 }

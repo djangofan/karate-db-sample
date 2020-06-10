@@ -9,7 +9,7 @@ import java.util.Objects;
 
 import qa.test.DriverShim;
 
-public class Test {
+public class DebugDriverLoad {
 
         @org.junit.Test
         public void will_not_work() {

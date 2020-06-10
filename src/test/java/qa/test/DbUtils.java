@@ -29,7 +29,8 @@ public class DbUtils {
 
         try {
             Driver driver = (Driver) Class.forName(driverClassName).newInstance();
-            DriverManager.registerDriver(new DriverShim(driver));
+            // shim is required for debugging with Karate
+            DriverManager.registerDriver(new qa.test.DriverShim(driver));
         } catch (InstantiationException e1) {
             e1.printStackTrace();
         } catch (IllegalAccessException e1) {

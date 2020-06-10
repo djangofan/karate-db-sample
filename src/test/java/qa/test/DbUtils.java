@@ -20,8 +20,7 @@ public class DbUtils {
         this.config = configuration;
     }
 
-    public List<Map<String, Object>> queryDB(final String query)
-            throws InstantiationException, IllegalAccessException, ClassNotFoundException {
+    public List<Map<String, Object>> queryDB(final String query) {
         final String url = (String) config.get("url");
         final String username = (String) config.get("username");
         final String password = (String) config.get("password");
@@ -33,12 +32,12 @@ public class DbUtils {
 
         try {
             final Driver d = (Driver) Class.forName(driverClassName).newInstance();
-            DriverManager.registerDriver(new DriverShim(d));
+            DriverManager.registerDriver(new DriverShim(d)); // shim allows loading when class is not on system class loader
             conn = DriverManager.getConnection(formattedUrl);
             System.out.println(String.format("Connection made to MsSql jdbc: %s", formattedUrl));
             stmt = conn.createStatement();
             return resultSetToArrayList(stmt.executeQuery(query));
-        } catch (final SQLException e1) {
+        } catch (final Exception e1) {
             e1.printStackTrace();
         } finally {
             try {

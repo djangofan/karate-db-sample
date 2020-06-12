@@ -28,8 +28,4 @@ To get MSSQL server on a mac:
 - Connect to the docker image using Azure data studio and load the .sql script data included in this repo.
 
 
-## Screenshot
-
-![Failure](https://github.com/djangofan/karate-db-sample/blob/master/debug.png)
-
 

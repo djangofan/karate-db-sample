@@ -4,7 +4,11 @@ DB Query Testing Example In Karate
 
 ## Setup
 
-See Karate website
+See Karate website.
+
+## NOTES
+
+I used this project to debug a scenario described here: https://github.com/kirksl/karate-runner/issues/53
 
 ## Execute
 

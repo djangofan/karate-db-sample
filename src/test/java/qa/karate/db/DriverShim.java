@@ -1,4 +1,4 @@
-package qa.test;
+package qa.karate.db;
 
 import java.sql.*;
 import java.util.Properties;
@@ -12,7 +12,7 @@ public class DriverShim implements Driver {
     
     private Driver driver;
 
-    DriverShim(Driver d) {
+    public DriverShim(Driver d) {
         this.driver = d;
     }
 

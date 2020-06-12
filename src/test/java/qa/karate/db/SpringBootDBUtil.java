@@ -1,3 +1,5 @@
+package qa.karate.db;
+
 import java.util.List;
 import java.util.Map;
 import org.slf4j.Logger;
@@ -7,7 +9,7 @@ import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
 public class SpringBootDBUtil {
     
-    private static final Logger logger = LoggerFactory.getLogger(DbUtils.class); 
+    private static final Logger logger = LoggerFactory.getLogger(SpringBootDBUtil.class); 
     
     private final JdbcTemplate jdbc;
 

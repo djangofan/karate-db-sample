@@ -1,4 +1,4 @@
-package qa.test;
+package qa.karate.db;
 
 import java.sql.Connection;
 import java.sql.Driver;
@@ -11,6 +11,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
+
 
 public class MSSqlUtil {
 
@@ -38,9 +40,9 @@ public class MSSqlUtil {
     public List<Map<String, Object>> resultSetToArrayList(final ResultSet rs) throws SQLException {
         final ResultSetMetaData md = rs.getMetaData();
         final int columns = md.getColumnCount();
-        final List<Map<String, Object>> list = new ArrayList<>();
+        List<Map<String, Object>> list = new ArrayList<>();
         while (rs.next()) {
-            final Map<String, Object> row = new HashMap<>(columns);
+            Map<String, Object> row = new HashMap<>(columns);
             for (int i = 1; i <= columns; ++i) {
                 row.put(md.getColumnName(i), rs.getObject(i));
             }
@@ -54,7 +56,7 @@ public class MSSqlUtil {
         try {
             Driver driver = (Driver) Class.forName(driverClassName).newInstance();
             // shim is required for debugging with Karate
-            DriverManager.registerDriver(new qa.test.DriverShim(driver));
+            DriverManager.registerDriver(new DriverShim(driver));
         } catch (InstantiationException e1) {
             e1.printStackTrace();
         } catch (IllegalAccessException e1) {

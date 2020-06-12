@@ -12,8 +12,8 @@ Feature: mssql query test
     * def queryResult = db.queryDB("SELECT TOP (3) OrderNumber, Id FROM [dbo].[Order] WHERE CustomerId = 79")
     * match queryResult[0] == {OrderNumber: '542379', Id: 2}
     * match queryResult contains {OrderNumber: '542379', Id: 2}
-    * karate.log(queryResult)
-    * print "queryResult: " + queryResult
+    * karate.log("queryResult:\n" + queryResult)
+    * print "queryResult:\n" + queryResult
 
   @db
   Scenario: query mssql using spring boot template
@@ -22,6 +22,6 @@ Feature: mssql query test
     * def queryResult = db.readRows("SELECT TOP (3) OrderNumber, Id FROM [dbo].[Order] WHERE CustomerId = 79")
     * match queryResult[0] == {OrderNumber: '542379', Id: 2}
     * match queryResult contains {OrderNumber: '542379', Id: 2}
-    * karate.log(queryResult)
-    * print "queryResult: " + queryResult
+    * karate.log("queryResult:\n" + queryResult)
+    * print "queryResult:\n" + queryResult
 
